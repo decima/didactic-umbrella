@@ -1,7 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: decima
- * Date: 05/02/19
- * Time: 22:47
- */
+<div class="row">
+    <div class="col-md-2">
+        <img class="img-responsive" src="<?= $game["image"]; ?>"/>
+    </div>
+    <div class="col-md-10">
+        <h1><?= $game["name"]; ?></h1>
+    </div>
+</div>

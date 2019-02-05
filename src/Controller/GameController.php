@@ -36,15 +36,17 @@ class GameController extends AbstractController
         return $this->render("game/form", ["game" => $game]);
     }
 
+
     public function show($id): Response
     {
-        $game = ["name" => "A random game", "image" => ""];
+        $game = ["id" => $id, "name" => "A random game", "image" => ""];
         return $this->render("game/show", ["game" => $game]);
     }
 
+
     public function edit($id, Request $request): Response
     {
-        $game = ["name" => "Super Smash Bros.", "image" => "https://yuzu-emu.org/images/game/boxart/super-smash-bros-ultimate.png"];
+        $game = ["id" => $id, "name" => "Super Smash Bros.", "image" => "https://yuzu-emu.org/images/game/boxart/super-smash-bros-ultimate.png"];
 
         if ($request->getMethod() == Request::METHOD_POST) {
             /**
