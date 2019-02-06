@@ -2,28 +2,34 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Game
  * @package App\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
+ * @ORM\Table(name="games")
  */
-
 class Game
 {
 
     /**
      * @var int
-     *
+     * @ORM\Id()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue()
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $name;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $image;
 
