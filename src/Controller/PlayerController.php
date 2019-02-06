@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\FakeData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,34 +13,56 @@ class PlayerController extends AbstractController
 
     public function index(Request $request): Response
     {
-
         /**
          * @todo lister les joueurs
          */
+        $players = FakeData::players(25);
+        return $this->render("player/index", ["players" => $players]);
+
     }
 
-    public function add(): Response
+    public function add(Request $request): Response
     {
+        $player = FakeData::players(1)[0];
 
+        if ($request->getMethod() == Request::METHOD_POST) {
+            /**
+             * @todo enregistrer l'objet
+             */
+            return $this->redirectTo("/player");
+        }
+        return $this->render("player/form", ["player" => $player]);
     }
+
 
     public function show($id): Response
     {
-        /**
-         * @todo afficher le joueur, ses derniers scores, et les jeux qu'il possede.
-         * @todo pouvoir gerer ses jeux
-         */
+        $player = FakeData::players(1)[0];
+        return $this->render("player/show", ["player" => $player]);
     }
 
-    public function edit($id): Response
+
+    public function edit($id, Request $request): Response
     {
-        /**
-         * @todo editer un joueur
-         */
+        $player = FakeData::players(1)[0];
+
+        if ($request->getMethod() == Request::METHOD_POST) {
+            /**
+             * @todo enregistrer l'objet
+             */
+            return $this->redirectTo("/player");
+        }
+        return $this->render("player/form", ["player" => $player]);
+
+
     }
 
     public function delete($id): Response
     {
+        /**
+         * @todo supprimer l'objet
+         */
+        return $this->redirectTo("/game");
 
     }
 

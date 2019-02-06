@@ -7,7 +7,10 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": "^4.2"
+        "symfony/http-foundation": "^4.2",
+        "doctrine/orm": "^2.6.2",
+        "symfony/dotenv": "^4.2",
+        "fzaninotto/faker": "^1.8"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2"

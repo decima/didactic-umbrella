@@ -4,6 +4,9 @@ namespace App;
 
 use App\Controller\ErrorController;
 use App\Controller\HomeController;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Setup;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,11 +15,12 @@ class Kernel
 {
     private $request = null;
 
+    private $entityManager = null;
 
     public function __construct()
     {
         $this->request = Request::createFromGlobals();
-
+        $this->entityManager = $this->buildEntityManager();
     }
 
     public function run()
@@ -24,6 +28,27 @@ class Kernel
         $response = $this->route($this->request);
         $response->send();
 
+
+    }
+
+    private function buildEntityManager(): EntityManager
+    {
+        // Create a simple "default" Doctrine ORM configuration for Annotations
+        $isDevMode = true;
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__), $isDevMode);
+
+        $conn = array(
+            'driver' => 'pdo_sqlite',
+            'path' => __DIR__ . '/../db.sqlite',
+        );
+
+        // obtaining the entity manager
+        return EntityManager::create($conn, $config);
+    }
+
+    public function getEntityManager()
+    {
+        return $this->entityManager;
 
     }
 
@@ -62,7 +87,8 @@ class Kernel
 
         $params = $reflexion->getParameters();
         $autoInject = [
-            Request::class => $this->request
+            Request::class => $this->request,
+            EntityManagerInterface::class => $this->entityManager,
         ];
         $paramValues = [];
         foreach ($params as $param) {
