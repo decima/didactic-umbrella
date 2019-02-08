@@ -6,6 +6,8 @@ namespace App\Controller;
 use App\FakeData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class ScoreController extends AbstractController
 {
@@ -22,11 +24,14 @@ class ScoreController extends AbstractController
             "games" => $games, "players" => $players]);
     }
 
-    public function add(): Response
+    public function add(Request $request): Response
     {
-        /**
-         * @todo ajouter un score
-         */
+        if ($request->getMethod() == Request::METHOD_POST) {
+            /**
+             * @todo enregistrer l'objet
+             */
+            return $this->redirectTo("/score");
+        }
     }
 
 }

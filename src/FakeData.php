@@ -35,7 +35,7 @@ class FakeData
         $faker = Factory::create("fr_FR");
         $players = [];
         for ($i = 1; $i <= $count; $i++) {
-            $players[] = ["id" => $i, "username" => $faker->userName, "email" => $faker->email];
+            $players[] = ["id" => $i, "username" => $faker->userName, "email" => $faker->email, "games"=>self::games(5)];
         }
 
         return $players;

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\FakeData;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,7 +39,7 @@ class PlayerController extends AbstractController
     public function show($id): Response
     {
         $player = FakeData::players(1)[0];
-        return $this->render("player/show", ["player" => $player]);
+        return $this->render("player/show", ["player" => $player, "availableGames" => FakeData::games()]);
     }
 
 
@@ -64,6 +65,16 @@ class PlayerController extends AbstractController
          */
         return $this->redirectTo("/game");
 
+    }
+
+    public function addgame($id, Request $request): Response
+    {
+        if ($request->getMethod() == Request::METHOD_POST) {
+            /**
+             * @todo enregistrer l'objet
+             */
+            return $this->redirectTo("/player");
+        }
     }
 
 }
