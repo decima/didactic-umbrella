@@ -1,5 +1,5 @@
-> **⚠ WARNING: Too old for you tutorial**  
-> Archived because we"re not un 2017 anymore.
+> **⚠ WARNING: Outdated**  
+> Archived because we"re not in 2017 anymore.
 > 
 
 # didactic-umbrella
